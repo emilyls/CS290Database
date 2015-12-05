@@ -146,7 +146,7 @@ function createRow(data) {
   var editBtn = document.createElement("BUTTON");
   editBtn.innerHTML = "Edit";
   editBtn.type = 'submit';
-  editBtn.action ="/updateWorkout";
+  editBtn.action ="updateWorkout";
   editBtn.method = "POST";
   editForm.appendChild(editBtn);
   row.appendChild(editForm);
