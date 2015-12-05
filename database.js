@@ -21,7 +21,7 @@ function bindButton() {
 		}
 
 		request.open('Post', 'http://52.88.123.171:5000/newWorkout', true);
-		request.setRequestHeader('Content-Type', 'application/json');
+		//request.setRequestHeader('Content-Type', 'application/json');
 
 		request.send(JSON.stringify(payload));
 

@@ -15,6 +15,10 @@ var pool = mysql.createPool({
   database: 'student'
 });
 
+app.get('/home', function(req, res) {
+  res.render('Form.html');
+})
+
 app.get('/newWorkout', function(req, res, next) {
   var context = {};
   pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
