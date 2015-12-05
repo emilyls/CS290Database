@@ -20,11 +20,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/newWorkout', function(req, res, next) {
   var context = {};
-  pool.query('INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)', [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
-    if (err) {
-      next(err);
-      return;
-    }
+  if (Object.keys(req.query).length == 0) {
     pool.query('SELECT * FROM workouts', function(err, rows, fields) {
       if (err) {
         next(err);
@@ -32,7 +28,22 @@ app.get('/newWorkout', function(req, res, next) {
       }
       res.send(JSON.stringify(rows));
     });
-  });
+  }
+  else {
+    pool.query('INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)', [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
+      if (err) {
+        next(err);
+        return;
+      }
+      pool.query('SELECT * FROM workouts', function(err, rows, fields) {
+        if (err) {
+          next(err);
+          return;
+        }
+        res.send(JSON.stringify(rows));
+      });
+    });
+  }
 });
 
 app.get('/reset-table',function(req,res,next){
