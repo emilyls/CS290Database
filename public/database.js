@@ -94,7 +94,7 @@ function createRow(data) {
 
   var deleteForm = document.createElement("FORM");
   var deleteFormId = document.createElement("INPUT");
-  deleteFormId.className = 'deleteId';
+  deleteFormId.className = "deleteId";
   deleteFormId.value = id;
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
@@ -127,7 +127,7 @@ function deleteRow(id) {
       console.log(response);
       var table = document.getElementById('workouts');
       var formIds = document.getElementsByClassName('deleteId');
-      console.log(formIds[0]);
+      console.log(formIds);
       var i = 0;
       var found = false
       while (!found && i < formIds.length) {
@@ -136,10 +136,10 @@ function deleteRow(id) {
           found = true;
         }
       }
-      if (found) {
-        var row = formIds[i].parentNode.parentNode;
-        table.removeChild(row); 
-      }
+      // if (found) {
+      //   var row = formIds[i].parentNode.parentNode;
+      //   table.removeChild(row); 
+      // }
     }
   }
 
