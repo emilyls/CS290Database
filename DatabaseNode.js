@@ -1,7 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var app = express();
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -41,4 +41,8 @@ app.get('/reset-table',function(req,res,next){
       res.render('home',context);
     });
   });
+});
+
+app.listen(app.get('port'), function(){
+  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
