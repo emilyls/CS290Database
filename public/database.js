@@ -11,8 +11,9 @@ function bindButton() {
     var weight = document.getElementById('weight').value;
     var date = document.getElementById('date').value;
     var lbs = document.getElementById('lbs').value;
+    console.log("Pounds: " + lbs);
     if (name == "") {
-      console.log("error"); 
+      console.log("cannot submit with no name"); 
       valid = false;
     }
     request.onreadystatechange = function() {
@@ -101,18 +102,10 @@ function createRow(data) {
   deleteBtn.innerHTML = "Delete";
   deleteBtn.type = 'submit';
   deleteForm.appendChild(deleteBtn);
-
-  // var editBtn = document.createElement("BUTTON");
-  // editBtn.appendChild(document.createTextNode("Edit"));
-  // editBtn.id = "edit";
-  // update.appendChild(formId);
-  // update.appendChild(editBtn);
-  // update.appendChild(deleteBtn);
-
-
   row.appendChild(deleteForm);
   var table = document.getElementById('workouts');
-  table.appendChild(row);     
+  table.appendChild(row);
+
   deleteBtn.addEventListener('click', function(x) {
     var id = x;
     return function () {
@@ -142,8 +135,61 @@ function createRow(data) {
       }
       request.open('GET', '/deleteWorkout?id=' + id, true);
       request.send(null);
-      //event.preventDefault();
     };
   }(deleteFormId.value)); 
+
+  var editForm = document.createElement("FORM");
+  var editFormId = document.createElement("INPUT");
+  editFormId.className = "editId";
+  editFormId.value = rowId;
+  editForm.appendChild(editFormId);
+  var editBtn = document.createElement("BUTTON");
+  editBtn.innerHTML = "Edit";
+  editBtn.type = 'submit';
+  editForm.appendChild(editBtn);
+  row.appendChild(editForm);
+  var table = document.getElementById('workouts');
+  table.appendChild(row);   
+
+  editBtn.addEventListener('click', function(x) {
+    var id = x;
+    return function () {
+      var rowIds = document.getElementsByClassName('id');
+      var row, id, name, reps, weight, date, lbs;
+      var i = 0;
+      var found = false
+      while (!found && i < rowIds.length) {
+        if (id == Number(rowIds[i].innerHTML)) {
+          found = true;
+        }
+        i++;
+      }
+      if (found) {
+        row = rowIds[i].parentNode;
+        var child = row.firstChild;
+        id = child.innerHTML;
+        child = child.nextSibling;
+        name = child.innerHTML;
+        child = child.nextSibling;
+        reps = child.innerHTML;
+        child = child.nextSibling;
+        weight = child.innerHTML;
+        child = child.nextSibling;
+        date = child.innerHTML;
+        child = child.nextSibling;
+        lbs = child.innerHTML;
+      }
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+          var response = JSON.parse(request.responseText);
+          console.log(response);
+        }
+      }
+      request.open('GET', '/updateWorkout?id=' + id + '&name=' + name + '&reps=' + reps + '&weight=' + weight + '&date=' + date + '&lbs=' + lbs, true);
+      request.send(null);
+    };
+  }(editFormId.value)); 
+
 }
 

@@ -5,7 +5,10 @@ var bodyParser = require('body-parser');
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
+var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 app.use(bodyParser.json());
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 app.set('port', 5000);
 
 var pool = mysql.createPool({
@@ -43,6 +46,16 @@ app.get('/newWorkout', function(req, res, next) {
       });
     });
   }
+});
+
+app.get('/updateWorkout', function(req,res,next) {
+  var data = {};
+  data.id = req.query.id;
+  data.name = req.query.name;
+  data.reps = req.query.reps;
+  data.weight = req.query.weight;
+  data.date = req.query.date;
+  data.lbs = req.query.lbs;
 });
 
 app.get('/deleteWorkout', function(req, res, next) {
