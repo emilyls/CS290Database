@@ -142,15 +142,8 @@ function createRow(data) {
       }
       request.open('GET', '/deleteWorkout?id=' + id, true);
       request.send(null);
-      event.preventDefault();
+      //event.preventDefault();
     };
   }(deleteFormId.value)); 
 }
 
-function deleteRow(id) {
-
-  }
-
-
-
-}
