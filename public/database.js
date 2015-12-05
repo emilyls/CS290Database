@@ -150,36 +150,37 @@ function firstTable() {
   request.send(null);
 }
 
-function deleteRow() {
-  document.getElementById('edit').addEventListener('click', function(event) {
+function deleteRow(event) {
+//  document.getElementById('delete').addEventListener('click', function(event) {
     var request = new XMLHttpRequest();
 
+    console.log(event);
     var button = event.target;
-    var form = event.parentNode;
-    console.log(form);
+//    var form = event.parentNode;
+//    console.log(form);
     var found = false;
-    var row;
-    while (button.previousSibling.id != "formId") {
-      formId = button.previousSibling;
-    }
+//   var row;
+//    while (button.previousSibling.id != "formId") {
+//      formId = button.previousSibling;
+//    }
 
-    var table = document.getElementById('workouts');
-    for (var i = 0; i < table.rows.length; i++) {
-      var cells = table.row[i].childNodes;
-      var id = cells.getElementById("id");
-      if (Number(id.innerHTML) == formId) {
-        row = table.row[i];
-        found = true;
-        break;
-      }
-    }
+//    var table = document.getElementById('workouts');
+//    for (var i = 0; i < table.rows.length; i++) {
+//      var cells = table.row[i].childNodes;
+//      var id = cells.getElementById("id");
+//      if (Number(id.innerHTML) == formId) {
+//        row = table.row[i];
+//        found = true;
+//        break;
+//      }
+//    }
 
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200) {
-        var response = JSON.parse(request.responseText);
-        console.log(response);
-      }
-    }
+//    request.onreadystatechange = function() {
+//      if (request.readyState == 4 && request.status == 200) {
+//        var response = JSON.parse(request.responseText);
+//        console.log(response);
+//      }
+//    }
 
     if (found == true) {
       request.open('GET', '/deleteWorkout?id=' + id, true);
@@ -187,5 +188,5 @@ function deleteRow() {
       table.removeChild(row); 
     }
     event.preventDefault();
-  });
+ // });
 }
