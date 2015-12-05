@@ -65,7 +65,7 @@ function firstTable() {
 }
 
 function createRow(data) {
-  var id = data.id;
+  var rowId = data.id;
   var name = data.name;
   var date = data.date;
   var lbs = data.lbs;
@@ -78,7 +78,7 @@ function createRow(data) {
   var weightCell = document.createElement("td");
   var dateCell = document.createElement("td");
   var lbsCell = document.createElement("td");
-  idCell.appendChild(document.createTextNode(id));
+  idCell.appendChild(document.createTextNode(rowId));
   idCell.className = "id";
   nameCell.appendChild(document.createTextNode(name));
   repsCell.appendChild(document.createTextNode(reps));
@@ -95,8 +95,8 @@ function createRow(data) {
   var deleteForm = document.createElement("FORM");
   var deleteFormId = document.createElement("INPUT");
   deleteFormId.className = "deleteId";
-  deleteFormId.value = id;
-  deleteForm.appendChild(deleteFormId);
+  deleteFormId.value = rowId;
+  deleteForm.appendChild(formId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.innerHTML = "Delete";
   deleteBtn.type = 'submit';
@@ -114,6 +114,7 @@ function createRow(data) {
   var table = document.getElementById('workouts');
   table.appendChild(row);     
   deleteBtn.addEventListener('click', function(x) {
+    console.log(x);
     return function (id) {
       id.preventDefault();
       deleteRow(id);
