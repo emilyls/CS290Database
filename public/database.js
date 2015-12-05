@@ -131,8 +131,8 @@ function deleteRow(id) {
       var i = 0;
       var found = false
       while (!found && i < rowIds.length) {
-        if (id == rowIds[i].value) {
-          console.log(id, rowIds[i].value);
+        if (id == Number(rowIds[i].innerHTML)) {
+          console.log(id, Number(rowIds[i].innerHTML));
           found = true;
         }
       }
