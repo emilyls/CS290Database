@@ -56,9 +56,14 @@ app.post('/', function(req,res,next) {
         next(err);
         return;
       }
-      context.edit = rows;
-      console.log(context.edit[0]);
-      res.render('updateWorkout', context.edit[0]);
+      var data = rows[0];
+      if(data.date != "0000-00-00") {
+        var date = new Date(rows[0].date);
+      	date = date.toJSON();
+        data.date = date.substring(0,10);
+      	console.log(data.date);
+      }
+      res.render('updateWorkout', data);
     });
   }
 });
