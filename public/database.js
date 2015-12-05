@@ -6,7 +6,7 @@ function createTable() {
 	if (request.readyState == 4 && request.status == 200) {
 		console.log("empty table");
 	}
-	request.opem('GET', 'http://52.88.123.171:5000/reset-table', true);
+	request.open('GET', 'http://52.88.123.171:5000/reset-table', true);
 	request.send(null);
 	event.preventDefault();
 }

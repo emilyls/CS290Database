@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.set('port', 5000);
 
 var pool = mysql.createPool({
+  connectionLimit: 10,
   host  : 'localhost',
   user  : 'student',
   password: 'default',
@@ -39,7 +40,7 @@ app.get('/reset-table',function(req,res,next){
     "weight INT,"+
     "date DATE,"+
     "lbs BOOLEAN)";
-    mysql.pool.query(createString, function(err){
+    pool.query(createString, function(err){
       context.results = "Table reset";
     });
   });
