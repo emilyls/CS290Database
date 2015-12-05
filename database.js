@@ -1,53 +1,37 @@
-var express = require('express');
-var mysql = require('mysql');
-var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
-var bodyParser = require('body-parser');
+document.addEventListener('DOMContentLoaded', bindButton);
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+function bindButton() {
+	document.getElementById('newWorkout').addEventListener('click', function(event){
+		var request = new XMLHttpRequest();
+		var payload = {name:null, reps:null,weight:null, date:null, lbs:null};
+		payload.name = document.getElementById('name').value;
+		payload.reps = document.getElementById('reps').value;
+		payload.weight = document.getElementById('weight').value;
+		payload.date = document.getElementById('date').value;
+		payload.lbs = document.getElementById('lbs').value;
 
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
-app.set('port', 5000);
+		
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				var response = JSON.parse(request.responseText);
+				var data = JSON.parse(response.data);
+				// document.getElementById('dataReturned').textContent = "Name: " + data.userName + "\tAge: " + data.userAge;
+				console.log(data)
+			}
+		}
 
-var pool = mysql.createPool({
-  host  : 'localhost',
-  user  : 'student',
-  password: 'default',
-  database: 'student'
-});
+		request.open('Post', 'http://52.88.123.171:5000/newWorkout', true);
+		request.setRequestHeader('Content-Type', 'application/json');
 
-app.get('/home', function(req, res, next) {
-  var context = {};
+		request.send(JSON.stringify(payload));
 
-  // Create Table
-  var tableString = "CREATE TABLE workouts("+
-  "id INT PRIMARY KEY AUTO_INCREMENT,"+
-  "name VARCHAR(255) NOT NULL,"+
-  "reps INT,"+
-  "weight INT,"+
-  "date DATE,"+
-  "lbs BOOLEAN)";
-  pool.query(tableString, function(err) {
-    context.results = "Table created";
-    res.render('Form', context);
-  });
-});
+		document.getElementById('name').value = "";
+		document.getElementById('reps').value = "";
+		document.getElementById('weight').value = "";
+		document.getElementById('date').value = "";
+		document.getElementById('lbs').value = "";
+		event.preventDefault();
+	});
+	
+}
 
-app.get('/reset-table',function(req,res,next){
-  var context = {};
-  pool.query("DROP TABLE IF EXISTS workouts", function(err){
-    var createString = "CREATE TABLE workouts("+
-    "id INT PRIMARY KEY AUTO_INCREMENT,"+
-    "name VARCHAR(255) NOT NULL,"+
-    "reps INT,"+
-    "weight INT,"+
-    "date DATE,"+
-    "lbs BOOLEAN)";
-    mysql.pool.query(createString, function(err){
-      context.results = "Table reset";
-      res.render('home',context);
-    });
-  });
-});
