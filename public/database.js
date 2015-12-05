@@ -57,9 +57,9 @@ function bindButton() {
             row.appendChild(lbsCell);
 
             var update = document.createElement("FORM");
-            var formId = document.createElement("TEXTAREA");
-            formId.appendChild(id);
-            form.className = "formId";
+            var formId = document.createElement("P");
+            formId.textContent = id.toString();
+            formId.id = "formId";
             var editBtn = document.createElement("BUTTON");
             editBtn.appendChild(document.createTextNode("Edit"));
             editBtn.id = "edit";
