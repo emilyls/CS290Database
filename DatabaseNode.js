@@ -19,7 +19,6 @@ var pool = mysql.createPool({
 app.use(express.static(__dirname + '/public'));
 
 app.get('/newWorkout', function(req, res, next) {
-  var context = {};
   pool.query('INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)', [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
     if (err) {
       next(err);
@@ -27,17 +26,18 @@ app.get('/newWorkout', function(req, res, next) {
     }
   });
   pool.query('SELECT * FROM workouts', function(err, rows, fields) {
+    var context = {};
     if (err) {
       next(err);
       return;
     }
-    context.results = JSON(stringify(rows));
-  }
+    console.log(JSON.stringify(rows));
+  });
   
 });
 
 app.get('/reset-table',function(req,res,next){
-  var context = {};
+  context = {}
   pool.query("DROP TABLE IF EXISTS workouts", function(err){
     var createString = "CREATE TABLE workouts("+
     "id INT PRIMARY KEY AUTO_INCREMENT,"+
@@ -48,6 +48,7 @@ app.get('/reset-table',function(req,res,next){
     "lbs BOOLEAN)";
     pool.query(createString, function(err){
       context.results = "Table reset";
+      console.log(context.results);
     });
   });
 });

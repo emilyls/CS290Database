@@ -19,6 +19,10 @@ function bindButton() {
 		var weight = document.getElementById('weight').value;
 		var date = document.getElementById('date').value;
 		var lbs = document.getElementById('lbs').value;
+                if (name == "") {
+                  console.log("error"); 
+                  return;
+                }
 
 		
 		request.onreadystatechange = function() {
@@ -26,7 +30,7 @@ function bindButton() {
 				var response = JSON.parse(request.responseText);
 				//var data = JSON.parse(response.data);
 				// document.getElementById('dataReturned').textContent = "Name: " + data.userName + "\tAge: " + data.userAge;
-				console.log(data)
+				//console.log(data)
 			}
 		}
 
