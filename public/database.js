@@ -168,11 +168,12 @@ function createRow(data) {
   deleteForm.method = 'get';
   deleteForm.action='/';
   var deleteFormId = document.createElement("INPUT");
-  deleteFormId.id = "formId";
+  deleteFormId.id = 'formId';
   deleteFormId.value = id;
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.value = 'Delete';
+  deleteTn.name = 'Delete';
   deleteForm.appendChild(deleteBtn);
 
   // var editBtn = document.createElement("BUTTON");
@@ -186,31 +187,32 @@ function createRow(data) {
   row.appendChild(deleteForm);
   var table = document.getElementById('workouts');
   table.appendChild(row);     
-              deleteBtn.addEventListener('submit', function(x) {
-                return function (id) {
-                  var request = new XMLHttpRequest();
-                  var button = x;
-                  var id = button.previousSibling.value;
-                  request.onreadystatechange = function() {
-                    if (request.readyState == 4 && request.status == 200) {
-                      var response = JSON.parse(request.responseText);
-                      console.log(response);
-                    }
-                  }
+  deleteBtn.addEventListener('submit', function(x) {
+    return function (id) {
+      deleteRow(id);
+    };
+  }(deleteFormId.value)); 
+}
 
-                  if (found == true) {
-                    request.open('GET', '/deleteWorkout?id=' + id, true);
-                    request.send(null);
-                    var table = document.getElementById('workouts');
-                    var row = button.parentNode.parentNode;
-                    table.removeChild(row); 
-                  }
-                  event.preventDefault()
-                };
-              }(deleteFormId.value)); 
+function deleteRow(id) {
+  console.log(id);
+  var request = new XMLHttpRequest();
+  var button = x;
+  var id = button.previousSibling.value;
+  request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200) {
+      var response = JSON.parse(request.responseText);
+      console.log(response);
+    }
+  }
 
+  if (found == true) {
     request.open('GET', '/deleteWorkout?id=' + id, true);
     request.send(null);
-    event.preventDefault();
-  }(deleteBtn), false); 
+    var table = document.getElementById('workouts');
+    var row = button.parentNode.parentNode;
+    table.removeChild(row); 
+  }
+  event.preventDefault();
+
 }
