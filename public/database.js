@@ -131,7 +131,7 @@ function deleteRow(id) {
   request.open('GET', '/deleteWorkout?id=' + id, true);
   request.send(null);
   var table = document.getElementById('workouts');
-  var formIds = getElementById('formId');
+  var formIds = document.getElementById('formId');
   var i = 0;
   var found = false
   while (!found && i < forms.length) {
