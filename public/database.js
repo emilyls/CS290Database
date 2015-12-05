@@ -114,6 +114,7 @@ function createRow(data) {
   table.appendChild(row);     
   deleteBtn.addEventListener('click', function(x) {
     return function (id) {
+      id.preventDefault;
       deleteRow(id);
     };
   }(deleteFormId.value)); 
@@ -135,6 +136,7 @@ function deleteRow(id) {
           console.log(id, Number(rowIds[i].innerHTML));
           found = true;
         }
+        i++;
       }
       if (found) {
         var row = rowIds[i].parentNode;
