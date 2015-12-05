@@ -68,25 +68,27 @@ function bindButton() {
               deleteBtn.value = 'Delete';
               // deleteForm
               deleteBtn.addEventListener('submit', function(x) {
-                var request = new XMLHttpRequest();
-                var button = x;
-                var id = button.previousSibling.value;
-                request.onreadystatechange = function() {
-                  if (request.readyState == 4 && request.status == 200) {
-                    var response = JSON.parse(request.responseText);
-                    console.log(response);
+                return function (id) {
+                  var request = new XMLHttpRequest();
+                  var button = x;
+                  var id = button.previousSibling.value;
+                  request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200) {
+                      var response = JSON.parse(request.responseText);
+                      console.log(response);
+                    }
                   }
-                }
 
-                if (found == true) {
-                  request.open('GET', '/deleteWorkout?id=' + id, true);
-                  request.send(null);
-                  var table = document.getElementById('workouts');
-                  var row = button.parentNode.parentNode;
-                  table.removeChild(row); 
-                }
-                event.preventDefault();
-              }(deleteBtn)); 
+                  if (found == true) {
+                    request.open('GET', '/deleteWorkout?id=' + id, true);
+                    request.send(null);
+                    var table = document.getElementById('workouts');
+                    var row = button.parentNode.parentNode;
+                    table.removeChild(row); 
+                  }
+                  event.preventDefault()
+                };
+              }(deleteFormId.value)); 
               deleteForm.appendChild(deleteBtn);
 
               // var editBtn = document.createElement("BUTTON");
