@@ -93,45 +93,30 @@ function createRow(data) {
         row.appendChild(lbsCell);
 
         var update = document.createElement("FORM");
-        var formId = document.createElement("P");
+        var formId = document.createElement("INPUT");
         formId.textContent = id.toString();
         formId.id = "formId";
+        formId.value = id;
         var editBtn = document.createElement("BUTTON");
         editBtn.appendChild(document.createTextNode("Edit"));
         editBtn.id = "edit";
         var deleteBtn = document.createElement("BUTTON");
         deleteBtn.appendChild(document.createTextNode("Delete"));
         deleteBtn.id = "delete";
-        deleteBtn..addEventListener('click', function(event) {
+        update.appendChild(formId);
+        update.appendChild(editBtn);
+        update.appendChild(deleteBtn);
+        row.appendChild(update);
+        var table = document.getElementById('workouts');
+        table.appendChild(row);
+        deleteBtn.addEventListener('click', function(event) {
           var request = new XMLHttpRequest();
-
-          console.log(event);
-          var button = event.target;
-      //    var form = event.parentNode;
-      //    console.log(form);
-          var found = false;
-      //   var row;
-      //    while (button.previousSibling.id != "formId") {
-      //      formId = button.previousSibling;
-      //    }
-
-      //    var table = document.getElementById('workouts');
-      //    for (var i = 0; i < table.rows.length; i++) {
-      //      var cells = table.row[i].childNodes;
-      //      var id = cells.getElementById("id");
-      //      if (Number(id.innerHTML) == formId) {
-      //        row = table.row[i];
-      //        found = true;
-      //        break;
-      //      }
-      //    }
-
-      //    request.onreadystatechange = function() {
-      //      if (request.readyState == 4 && request.status == 200) {
-      //        var response = JSON.parse(request.responseText);
-      //        console.log(response);
-      //      }
-      //    }
+          request.onreadystatechange = function() {
+            if (request.readyState == 4 && request.status == 200) {
+              var response = JSON.parse(request.responseText);
+              console.log(response);
+            }
+          }
 
           if (found == true) {
             request.open('GET', '/deleteWorkout?id=' + id, true);
@@ -140,10 +125,4 @@ function createRow(data) {
           }
           event.preventDefault();
         }); 
-        update.appendChild(formId);
-        update.appendChild(editBtn);
-        update.appendChild(deleteBtn);
-        row.appendChild(update);
-        var table = document.getElementById('workouts');
-        table.appendChild(row);
 }
