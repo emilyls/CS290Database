@@ -139,18 +139,21 @@ function createRow(data) {
   }(deleteFormId.value)); 
 
   var editForm = document.createElement("FORM");
+  editForm.action ="/";
+  editForm.method = "POST";
+
   var editFormId = document.createElement("INPUT");
   editFormId.className = "editId";
   editFormId.value = rowId;
   editForm.appendChild(editFormId);
+
   var editBtn = document.createElement("BUTTON");
   editBtn.innerHTML = "Edit";
   editBtn.name = "Edit";
   editBtn.value ="Edit";
   editBtn.type = 'submit';
-  editForm.action ="/";
-  editForm.type = "POST";
   editForm.appendChild(editBtn);
+
   row.appendChild(editForm);
   var table = document.getElementById('workouts');
   table.appendChild(row);   
