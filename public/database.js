@@ -99,6 +99,7 @@ function createRow(data) {
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.innerHTML = "Delete";
+  deleteBtn.type = 'submit';
   deleteForm.appendChild(deleteBtn);
 
   // var editBtn = document.createElement("BUTTON");
@@ -114,7 +115,7 @@ function createRow(data) {
   table.appendChild(row);     
   deleteBtn.addEventListener('click', function(x) {
     return function (id) {
-      id.preventDefault;
+      id.preventDefault();
       deleteRow(id);
     };
   }(deleteFormId.value)); 
