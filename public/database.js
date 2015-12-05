@@ -200,13 +200,11 @@ function deleteRow(id) {
     }
   }
 
-  if (found == true) {
-    request.open('GET', '/deleteWorkout?id=' + id, true);
-    request.send(null);
-    var table = document.getElementById('workouts');
-    var row = button.parentNode.parentNode;
-    table.removeChild(row); 
-  }
+  request.open('GET', '/deleteWorkout?id=' + id, true);
+  request.send(null);
+  var table = document.getElementById('workouts');
+  var row = button.parentNode.parentNode;
+  table.removeChild(row); 
   event.preventDefault();
 
 }
