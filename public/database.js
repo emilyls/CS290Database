@@ -3,28 +3,25 @@ document.addEventListener('DOMContentLoaded', bindButton);
 function bindButton() {
 	document.getElementById('newWorkout').addEventListener('click', function(event){
 		var request = new XMLHttpRequest();
-		var payload = {name:null, reps:null,weight:null, date:null, lbs:null};
-		payload.name = document.getElementById('name').value;
-		payload.reps = document.getElementById('reps').value;
-		payload.weight = document.getElementById('weight').value;
-		payload.date = document.getElementById('date').value;
-		payload.lbs = document.getElementById('lbs').value;
+		var name = document.getElementById('name').value;
+		var reps = document.getElementById('reps').value;
+		var weight = document.getElementById('weight').value;
+		var date = document.getElementById('date').value;
+		var lbs = document.getElementById('lbs').value;
 
 		
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
 				var response = JSON.parse(request.responseText);
-				var data = JSON.parse(response.data);
+				//var data = JSON.parse(response.data);
 				// document.getElementById('dataReturned').textContent = "Name: " + data.userName + "\tAge: " + data.userAge;
 				console.log(data)
 			}
 		}
 
-		request.open('Post', 'http://52.88.123.171:5000/newWorkout', true);
-		//request.setRequestHeader('Content-Type', 'application/json');
+		request.open('GET', 'http://52.88.123.171:5000/newWorkout?name=' + name + '&reps=' + reps + '&weight=' + weight + '&date=' + date + '&lbs=' + lbs, true);
 
-		request.send(JSON.stringify(payload));
-
+		request.send(null);
 		document.getElementById('name').value = "";
 		document.getElementById('reps').value = "";
 		document.getElementById('weight').value = "";
@@ -32,6 +29,5 @@ function bindButton() {
 		document.getElementById('lbs').value = "";
 		event.preventDefault();
 	});
-	
 }
 
