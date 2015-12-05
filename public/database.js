@@ -94,7 +94,7 @@ function createRow(data) {
 
   var deleteForm = document.createElement("FORM");
   var deleteFormId = document.createElement("INPUT");
-  deleteFormId.id = 'formId';
+  deleteFormId.id = 'deleteId';
   deleteFormId.value = id;
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
@@ -126,8 +126,8 @@ function deleteRow(id) {
       var response = JSON.parse(request.responseText);
       console.log(response);
       var table = document.getElementById('workouts');
-      var formIds = document.getElementById('formId');
-      console.log(formIds);
+      var formIds = document.getElementById('deleteId');
+      console.log(formIds[0]);
       var i = 0;
       var found = false
       while (!found && i < formIds.length) {
