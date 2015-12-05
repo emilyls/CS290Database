@@ -24,8 +24,9 @@ app.get('/newWorkout', function(req, res, next) {
       next(err);
       return;
     }
-    context.results = "Inserted id " + results.insertId;
+    console.log("test");
   });
+  //res.render('home', context);
 });
 
 app.get('/reset-table',function(req,res,next){
