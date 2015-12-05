@@ -146,50 +146,11 @@ function createRow(data) {
   var editBtn = document.createElement("BUTTON");
   editBtn.innerHTML = "Edit";
   editBtn.type = 'submit';
+  editBtn.action ="/updateWorkout";
+  editBtn.method = "POST";
   editForm.appendChild(editBtn);
   row.appendChild(editForm);
   var table = document.getElementById('workouts');
   table.appendChild(row);   
-
-  editBtn.addEventListener('click', function(x) {
-    var id = x;
-    return function () {
-      var rowIds = document.getElementsByClassName('id');
-      var row, id, name, reps, weight, date, lbs;
-      var i = 0;
-      var found = false
-      while (!found && i < rowIds.length) {
-        if (id == Number(rowIds[i].innerHTML)) {
-          found = true;
-        }
-        i++;
-      }
-      if (found) {
-        row = rowIds[i].parentNode;
-        var child = row.firstChild;
-        id = child.innerHTML;
-        child = child.nextSibling;
-        name = child.innerHTML;
-        child = child.nextSibling;
-        reps = child.innerHTML;
-        child = child.nextSibling;
-        weight = child.innerHTML;
-        child = child.nextSibling;
-        date = child.innerHTML;
-        child = child.nextSibling;
-        lbs = child.innerHTML;
-      }
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if (request.readyState == 4 && request.status == 200) {
-          var response = JSON.parse(request.responseText);
-          console.log(response);
-        }
-      }
-      request.open('GET', '/updateWorkout?id=' + id + '&name=' + name + '&reps=' + reps + '&weight=' + weight + '&date=' + date + '&lbs=' + lbs, true);
-      request.send(null);
-    };
-  }(editFormId.value)); 
-
 }
 

@@ -49,13 +49,15 @@ app.get('/newWorkout', function(req, res, next) {
 });
 
 app.get('/updateWorkout', function(req,res,next) {
-  var data = {};
-  data.id = req.query.id;
-  data.name = req.query.name;
-  data.reps = req.query.reps;
-  data.weight = req.query.weight;
-  data.date = req.query.date;
-  data.lbs = req.query.lbs;
+  console.log(req.body);
+  // var data = {};
+  // data.id = req.query.id;
+  // data.name = req.query.name;
+  // data.reps = req.query.reps;
+  // data.weight = req.query.weight;
+  // data.date = req.query.date;
+  // data.lbs = req.query.lbs;
+  res.render('update');
 });
 
 app.get('/deleteWorkout', function(req, res, next) {
