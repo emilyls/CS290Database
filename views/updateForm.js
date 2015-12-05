@@ -15,12 +15,13 @@ function bindButton() {
         var response = JSON.parse(request.responseText);
         var newPage = new XMLHttpRequest();
         newpage.open('GET', '/newWorkout', true);
+        request.send(null);
       }
       
-      request.open('Post', '/', true);
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(payload));
-
     }
+    request.open('Post', '/', true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(JSON.stringify(payload));
+    event.preventDefault();
   });
 } 
