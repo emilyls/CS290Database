@@ -101,28 +101,7 @@ function createRow(data) {
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.value = 'Delete';
-  deleteForm
-  deleteBtn.addEventListener('click', function(x) {
-    var request = new XMLHttpRequest();
-    var button = x;
-    var id = button.previousSibling.value;
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && request.status == 200) {
-        var response = JSON.parse(request.responseText);
-        console.log(response);
-      }
-    }
-
-    if (found == true) {
-      request.open('GET', '/deleteWorkout?id=' + id, true);
-      request.send(null);
-      var table = document.getElementById('workouts');
-      var row = button.parentNode.parentNode;
-      table.removeChild(row); 
-    }
-    event.preventDefault();
-  }(deleteBtn)); 
-  deleteForm.appendChild(deleteBtn);
+    deleteForm.appendChild(deleteBtn);
 
   // var editBtn = document.createElement("BUTTON");
   // editBtn.appendChild(document.createTextNode("Edit"));
@@ -135,4 +114,22 @@ function createRow(data) {
   row.appendChild(deleteForm);
   var table = document.getElementById('workouts');
   table.appendChild(row);     
+  deleteBtn.addEventListener('click', function(x) {
+    var request = new XMLHttpRequest();
+    var button = x;
+    var id = button.previousSibling.value;
+    request.onreadystatechange = function() {
+      if (request.readyState == 4 && request.status == 200) {
+        var response = JSON.parse(request.responseText);
+        console.log(response);
+        var table = document.getElementById('workouts');
+        var row = button.parentNode.parentNode;
+        table.removeChild(row); 
+      }
+    }
+
+    request.open('GET', '/deleteWorkout?id=' + id, true);
+    request.send(null);
+    event.preventDefault();
+  }(deleteBtn), false); 
 }
