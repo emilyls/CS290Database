@@ -1,11 +1,11 @@
 var express = require('express');
 var mysql = require('mysql');
-var app = express();
+var html = require('html');
 var bodyParser = require('body-parser');
 
+var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
 app.set('port', 5000);
 
 var pool = mysql.createPool({
@@ -17,7 +17,7 @@ var pool = mysql.createPool({
 
 app.get('/home', function(req, res) {
   res.render('Form.html');
-})
+});
 
 app.get('/newWorkout', function(req, res, next) {
   var context = {};
