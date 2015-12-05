@@ -92,24 +92,32 @@ function createRow(data) {
         row.appendChild(dateCell);
         row.appendChild(lbsCell);
 
-        var update = document.createElement("FORM");
-        var formId = document.createElement("INPUT");
-        formId.textContent = id.toString();
-        formId.id = "formId";
-        formId.value = id;
-        var editBtn = document.createElement("BUTTON");
-        editBtn.appendChild(document.createTextNode("Edit"));
-        editBtn.id = "edit";
-        var deleteBtn = document.createElement("BUTTON");
-        deleteBtn.appendChild(document.createTextNode("Delete"));
-        deleteBtn.id = "delete";
-        update.appendChild(formId);
-        update.appendChild(editBtn);
-        update.appendChild(deleteBtn);
-        row.appendChild(update);
+        var deleteForm = document.createElement("FORM");
+        deleteForm.method = 'post';
+        deleteForm.action='/';
+        var deleteFormId = document.createElement("INPUT");
+        deleteFormId.id = "formId";
+        deleteFormId.value = id;
+        var deleteBtn = document.createElement("INPUT");
+        deleteBtn.type = 'submit'
+        deleteBtn.name = 'Delete';
+        deleteBtn.value = 'Delete';
+
+
+
+        // var editBtn = document.createElement("BUTTON");
+        // editBtn.appendChild(document.createTextNode("Edit"));
+        // editBtn.id = "edit";
+        // update.appendChild(formId);
+        // update.appendChild(editBtn);
+        // update.appendChild(deleteBtn);
+        row.appendChild(deleteForm);
         var table = document.getElementById('workouts');
         table.appendChild(row);
-        deleteBtn.addEventListener('click', function(event) {
+       
+}
+
+ deleteBtn.addEventListener('click', function(event) {
           var request = new XMLHttpRequest();
           request.onreadystatechange = function() {
             if (request.readyState == 4 && request.status == 200) {
@@ -125,4 +133,3 @@ function createRow(data) {
           }
           event.preventDefault();
         }); 
-}
