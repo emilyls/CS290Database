@@ -96,7 +96,7 @@ function createRow(data) {
   var deleteFormId = document.createElement("INPUT");
   deleteFormId.className = "deleteId";
   deleteFormId.value = rowId;
-  deleteForm.appendChild(formId);
+  deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.innerHTML = "Delete";
   deleteBtn.type = 'submit';
@@ -114,37 +114,37 @@ function createRow(data) {
   var table = document.getElementById('workouts');
   table.appendChild(row);     
   deleteBtn.addEventListener('click', function(x) {
-    console.log(x);
-    return function (id) {
-      id.preventDefault();
-      deleteRow(id);
+    var id = x;
+    return function () {
+      console.log(id);
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState == 4 && request.status == 200) {
+          var response = JSON.parse(request.responseText);
+          console.log(response);
+          var table = document.getElementById('workouts');
+          var rowIds = document.getElementsByClassName('id');
+          console.log(rowIds);
+          var i = 0;
+          var found = false
+          while (!found && i < rowIds.length) {
+            if (id == Number(rowIds[i].innerHTML)) {
+              console.log(id, Number(rowIds[i].innerHTML));
+              found = true;
+            }
+            i++;
+          }
+          if (found) {
+            var row = rowIds[i].parentNode;
+            table.removeChild(row); 
+          }
+        }
     };
   }(deleteFormId.value)); 
 }
 
 function deleteRow(id) {
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    if (request.readyState == 4 && request.status == 200) {
-      var response = JSON.parse(request.responseText);
-      console.log(response);
-      var table = document.getElementById('workouts');
-      var rowIds = document.getElementsByClassName('id');
-      console.log(rowIds);
-      var i = 0;
-      var found = false
-      while (!found && i < rowIds.length) {
-        if (id == Number(rowIds[i].innerHTML)) {
-          console.log(id, Number(rowIds[i].innerHTML));
-          found = true;
-        }
-        i++;
-      }
-      if (found) {
-        var row = rowIds[i].parentNode;
-        table.removeChild(row); 
-      }
-    }
+
   }
 
   request.open('GET', '/deleteWorkout?id=' + id, true);
