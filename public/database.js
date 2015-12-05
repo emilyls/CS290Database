@@ -165,15 +165,12 @@ function createRow(data) {
   row.appendChild(lbsCell);
 
   var deleteForm = document.createElement("FORM");
-  deleteForm.method = 'get';
-  deleteForm.action='/';
   var deleteFormId = document.createElement("INPUT");
   deleteFormId.id = 'formId';
   deleteFormId.value = id;
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
-  deleteBtn.value = 'Delete';
-  deleteTn.name = 'Delete';
+  deleteBtn.innerHTML = "Delete";
   deleteForm.appendChild(deleteBtn);
 
   // var editBtn = document.createElement("BUTTON");
@@ -197,8 +194,6 @@ function createRow(data) {
 function deleteRow(id) {
   console.log(id);
   var request = new XMLHttpRequest();
-  var button = x;
-  var id = button.previousSibling.value;
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
       var response = JSON.parse(request.responseText);
