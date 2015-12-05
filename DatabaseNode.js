@@ -15,9 +15,7 @@ var pool = mysql.createPool({
   database: 'student'
 });
 
-app.get('/home', function(req, res) {
-  res.render('Form.html');
-});
+app.use('/home', express.static("Form.html"));
 
 app.get('/newWorkout', function(req, res, next) {
   var context = {};
