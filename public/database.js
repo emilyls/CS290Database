@@ -145,9 +145,10 @@ function createRow(data) {
   var editFormId = document.createElement("INPUT");
   editFormId.className = "editId";
   editFormId.value = rowId;
+  editFormId.name ="id";
   editForm.appendChild(editFormId);
 
-  var editBtn = document.createElement("BUTTON");
+  var editBtn = document.createElement("INPUT");
   editBtn.innerHTML = "Edit";
   editBtn.name = "Edit";
   editBtn.value ="Edit";
