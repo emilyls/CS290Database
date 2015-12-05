@@ -139,6 +139,10 @@ function createRow(data) {
             table.removeChild(row); 
           }
         }
+      }
+      request.open('GET', '/deleteWorkout?id=' + id, true);
+      request.send(null);
+      event.preventDefault();
     };
   }(deleteFormId.value)); 
 }
@@ -147,8 +151,6 @@ function deleteRow(id) {
 
   }
 
-  request.open('GET', '/deleteWorkout?id=' + id, true);
-  request.send(null);
-  event.preventDefault();
+
 
 }
