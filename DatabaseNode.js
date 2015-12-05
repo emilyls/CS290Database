@@ -19,25 +19,20 @@ var pool = mysql.createPool({
 app.use(express.static(__dirname + '/public'));
 
 app.get('/newWorkout', function(req, res, next) {
+  var context = {};
   pool.query('INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)', [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
     if (err) {
       next(err);
       return;
     }
+    pool.query('SELECT * FROM workouts', function(err, rows, fields) {
+      if (err) {
+        next(err);
+        return;
+      }
+      res.send(JSON.stringify(rows));
+    });
   });
-  rens.render(getData)
-});
-
-app.get('/getData', function(req, res, next) {
-  pool.query('SELECT * FROM workouts', function(err, rows, fields) {
-    var context = {};
-    if (err) {
-      next(err);
-      return;
-    }
-    console.log(JSON.stringify(rows));
-  });
-  
 });
 
 app.get('/reset-table',function(req,res,next){
