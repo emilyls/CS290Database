@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', bindButton);
+document.addEventListener('DOMContentLoaded', createTable);
+
+function createTable() {
+	var request = new XMLHttpRequest();
+	if (request.readyState == 4 && request.status == 200) {
+		console.log("empty table");
+	}
+	request.opem('GET', 'http://52.88.123.171:5000/reset-table', true);
+	request.send(null);
+	event.preventDefault();
+}
 
 function bindButton() {
 	document.getElementById('newWorkout').addEventListener('click', function(event){
