@@ -61,6 +61,7 @@ app.get('/reset-table',function(req,res,next){
       console.log(context.results);
     });
   });
+  res.sendFile(__dirname +'/public/Form.html');
 });
 
 app.listen(app.get('port'), function(){

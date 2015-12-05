@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', bindButton);
 document.addEventListener('DOMContentLoaded', firstTable);
 
 function bindButton() {
-  document.getElementById('newWorkout').addEventListener('click', function(event){
+  document.getElementById('newWorkout').addEventListener('click', function(event) {
     var request = new XMLHttpRequest();
+    var valid = true;
     var name = document.getElementById('name').value;
     var reps = document.getElementById('reps').value;
     var weight = document.getElementById('weight').value;
@@ -11,19 +12,17 @@ function bindButton() {
     var lbs = document.getElementById('lbs').value;
     if (name == "") {
       console.log("error"); 
-      return;
+      valid = false;
     }
     request.onreadystatechange = function() {
       if (request.readyState == 4 && request.status == 200) {
         var response = JSON.parse(request.responseText);
-        console.log(response);
         for (var i = 0; i < response.length; i++) {
           var id = response[i].id;
           var ids = document.getElementsByClassName("id");
           var found = false;
           var j = 0;
           while(!found && j < ids.length) {
-            console.log(id, Number(ids[j].innerHTML));
             if (id == Number(ids[j].innerHTML)) {
               found = true;
             }
@@ -62,13 +61,15 @@ function bindButton() {
       }
     }
 
-    request.open('GET', 'http://52.88.123.171:5000/newWorkout?name=' + name + '&reps=' + reps + '&weight=' + weight + '&date=' + date + '&lbs=' + lbs, true);
-    request.send(null);
-    document.getElementById('name').value = "";
-    document.getElementById('reps').value = "";
-    document.getElementById('weight').value = "";
-    document.getElementById('date').value = "";
-    document.getElementById('lbs').value = "";
+    if (valid == true) {
+      request.open('GET', '/newWorkout?name=' + name + '&reps=' + reps + '&weight=' + weight + '&date=' + date + '&lbs=' + lbs, true);
+      request.send(null);
+      document.getElementById('name').value = "";
+      document.getElementById('reps').value = "";
+      document.getElementById('weight').value = "";
+      document.getElementById('date').value = "";
+      document.getElementById('lbs').value = "";
+    }
     event.preventDefault();
   });
 }
@@ -111,7 +112,7 @@ function firstTable() {
     }
   }
 
-  request.open('GET', 'http://52.88.123.171:5000/newWorkout', true);
+  request.open('GET', 'newWorkout', true);
   request.send(null);
 }
 
