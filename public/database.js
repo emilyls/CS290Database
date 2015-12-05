@@ -184,7 +184,7 @@ function createRow(data) {
   row.appendChild(deleteForm);
   var table = document.getElementById('workouts');
   table.appendChild(row);     
-  deleteBtn.addEventListener('submit', function(x) {
+  deleteBtn.addEventListener('click', function(x) {
     return function (id) {
       deleteRow(id);
     };
@@ -192,7 +192,6 @@ function createRow(data) {
 }
 
 function deleteRow(id) {
-  console.log(id);
   var request = new XMLHttpRequest();
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
