@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', bindButton);
 document.addEventListener('DOMContentLoaded', firstTable);
-document.addEventListener('DOMContentLoaded', deleteRow);
-document.addEventListener('DOMContentLoaded', updateRow);
+//document.addEventListener('DOMContentLoaded', updateRow);
 
 function bindButton() {
   document.getElementById('newWorkout').addEventListener('click', function(event) {
@@ -67,6 +66,7 @@ function bindButton() {
             var deleteBtn = document.createElement("BUTTON");
             deleteBtn.appendChild(document.createTextNode("Delete"));
             deleteBtn.id = "delete";
+            deleteBtn.onclick = deleteRow; 
             update.appendChild(formId);
             update.appendChild(editBtn);
             update.appendChild(deleteBtn);
@@ -126,20 +126,20 @@ function firstTable() {
         row.appendChild(lbsCell);
 
         var update = document.createElement("FORM");
-        var formId = document.createElement("TEXTAREA");
-        formId.appendChild(id);
-        form.id = "formId";
+        var formId = document.createElement("P");
+        formId.textContent = id.toString();
+        formId.id = "formId";
         var editBtn = document.createElement("BUTTON");
         editBtn.appendChild(document.createTextNode("Edit"));
         editBtn.id = "edit";
         var deleteBtn = document.createElement("BUTTON");
         deleteBtn.appendChild(document.createTextNode("Delete"));
         deleteBtn.id = "delete";
+        deleteBtn.onclick = deleteRow; 
         update.appendChild(formId);
         update.appendChild(editBtn);
         update.appendChild(deleteBtn);
         row.appendChild(update);
-
         var table = document.getElementById('workouts');
         table.appendChild(row);
       }
@@ -155,7 +155,8 @@ function deleteRow() {
     var request = new XMLHttpRequest();
 
     var button = event.target;
-    var formId;
+    var form = event.parentNode;
+    console.log(form);
     var found = false;
     var row;
     while (button.previousSibling.id != "formId") {
@@ -177,7 +178,6 @@ function deleteRow() {
       if (request.readyState == 4 && request.status == 200) {
         var response = JSON.parse(request.responseText);
         console.log(response);
-        }
       }
     }
 
