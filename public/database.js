@@ -126,20 +126,20 @@ function deleteRow(id) {
       var response = JSON.parse(request.responseText);
       console.log(response);
       var table = document.getElementById('workouts');
-      var formIds = document.getElementsByClassName('deleteId');
-      console.log(formIds);
+      var rowIds = document.getElementsByClassName('id');
+      console.log(rowIds);
       var i = 0;
       var found = false
-      while (!found && i < formIds.length) {
-        if (id == formIds[i].value) {
-          console.log(id, formIds[i].value);
+      while (!found && i < rowIds.length) {
+        if (id == rowIds[i].value) {
+          console.log(id, rowIds[i].value);
           found = true;
         }
       }
-      // if (found) {
-      //   var row = formIds[i].parentNode.parentNode;
-      //   table.removeChild(row); 
-      // }
+      if (found) {
+        var row = rowIds[i].parentNode;
+        table.removeChild(row); 
+      }
     }
   }
 
