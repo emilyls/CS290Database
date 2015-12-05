@@ -98,50 +98,7 @@ function firstTable() {
     if (request.readyState == 4 && request.status == 200) {
       var response = JSON.parse(request.responseText);
       for (var i = 0; i < response.length; i++) {
-        var id = response[i].id;
-        var name = response[i].name;
-        var date = response[i].date;
-        var lbs = response[i].lbs;
-        var reps = response[i].reps;
-        var weight = response[i].weight;
-        var row = document.createElement("tr");
-        var idCell = document.createElement("td");
-        var nameCell = document.createElement("td");
-        var repsCell = document.createElement("td");
-        var weightCell = document.createElement("td");
-        var dateCell = document.createElement("td");
-        var lbsCell = document.createElement("td");
-        idCell.appendChild(document.createTextNode(id));
-        idCell.className = "id";
-        nameCell.appendChild(document.createTextNode(name));
-        repsCell.appendChild(document.createTextNode(reps));
-        weightCell.appendChild(document.createTextNode(weight));
-        dateCell.appendChild(document.createTextNode(date));
-        lbsCell.appendChild(document.createTextNode(lbs));
-        row.appendChild(idCell);
-        row.appendChild(nameCell);
-        row.appendChild(repsCell);
-        row.appendChild(weightCell);
-        row.appendChild(dateCell);
-        row.appendChild(lbsCell);
-
-        var update = document.createElement("FORM");
-        var formId = document.createElement("P");
-        formId.textContent = id.toString();
-        formId.id = "formId";
-        var editBtn = document.createElement("BUTTON");
-        editBtn.appendChild(document.createTextNode("Edit"));
-        editBtn.id = "edit";
-        var deleteBtn = document.createElement("BUTTON");
-        deleteBtn.appendChild(document.createTextNode("Delete"));
-        deleteBtn.id = "delete";
-        deleteBtn.onclick = deleteRow; 
-        update.appendChild(formId);
-        update.appendChild(editBtn);
-        update.appendChild(deleteBtn);
-        row.appendChild(update);
-        var table = document.getElementById('workouts');
-        table.appendChild(row);
+        createRow(response[i]);
       }
     }
   }
@@ -189,4 +146,51 @@ function deleteRow(event) {
     }
     event.preventDefault();
  // });
+}
+
+function createRow(data) {
+        var id = data.id;
+        var name = data.name;
+        var date = data.date;
+        var lbs = data.lbs;
+        var reps = data.reps;
+        var weight = data.weight;
+        var row = document.createElement("tr");
+        var idCell = document.createElement("td");
+        var nameCell = document.createElement("td");
+        var repsCell = document.createElement("td");
+        var weightCell = document.createElement("td");
+        var dateCell = document.createElement("td");
+        var lbsCell = document.createElement("td");
+        idCell.appendChild(document.createTextNode(id));
+        idCell.className = "id";
+        nameCell.appendChild(document.createTextNode(name));
+        repsCell.appendChild(document.createTextNode(reps));
+        weightCell.appendChild(document.createTextNode(weight));
+        dateCell.appendChild(document.createTextNode(date));
+        lbsCell.appendChild(document.createTextNode(lbs));
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        row.appendChild(repsCell);
+        row.appendChild(weightCell);
+        row.appendChild(dateCell);
+        row.appendChild(lbsCell);
+
+        var update = document.createElement("FORM");
+        var formId = document.createElement("P");
+        formId.textContent = id.toString();
+        formId.id = "formId";
+        var editBtn = document.createElement("BUTTON");
+        editBtn.appendChild(document.createTextNode("Edit"));
+        editBtn.id = "edit";
+        var deleteBtn = document.createElement("BUTTON");
+        deleteBtn.appendChild(document.createTextNode("Delete"));
+        deleteBtn.id = "delete";
+        deleteBtn.onclick = deleteRow; 
+        update.appendChild(formId);
+        update.appendChild(editBtn);
+        update.appendChild(deleteBtn);
+        row.appendChild(update);
+        var table = document.getElementById('workouts');
+        table.appendChild(row);
 }
