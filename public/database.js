@@ -67,7 +67,7 @@ function bindButton() {
               var deleteBtn = document.createElement("BUTTON");
               deleteBtn.value = 'Delete';
               // deleteForm
-              deleteBtn.addEventListener('click', function(x) {
+              deleteBtn.addEventListener('submit', function(x) {
                 var request = new XMLHttpRequest();
                 var button = x;
                 var id = button.previousSibling.value;
