@@ -139,8 +139,10 @@ function deleteRow(id) {
       found = true;
     }
   }
-  var row = formIds[i].parentNode.parentNode;
-  table.removeChild(row); 
+  if (found) {
+    var row = formIds[i].parentNode.parentNode;
+    table.removeChild(row); 
+  }
   event.preventDefault();
 
 }
