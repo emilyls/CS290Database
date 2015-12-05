@@ -51,13 +51,13 @@ app.get('/newWorkout', function(req, res, next) {
 app.post('/', function(req,res,next) {
   console.log(req.body);
   if (req.body['Edit']) {
-    var data = {};
-    data.id = req.query.id;
-    data.name = req.query.name;
-    data.reps = req.query.reps;
-    data.weight = req.query.weight;
-    data.date = req.query.date;
-    data.lbs = req.query.lbs;
+    pool.query('SELECT * FROM workouts WHERE id=(?)', [req.query.id], function(err, result) {
+      if (err) {
+        next(err);
+        return;
+      }
+      var data = JSON.stringify(result);
+    });
     res.render('update', data);
 
   }
