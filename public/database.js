@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', bindButton);
 document.addEventListener('DOMContentLoaded', firstTable);
+document.addEventListener('DOMContentLoaded', deleteRow);
+document.addEventListener('DOMContentLoaded', updateRow);
 
 function bindButton() {
   document.getElementById('newWorkout').addEventListener('click', function(event) {
@@ -54,6 +56,22 @@ function bindButton() {
             row.appendChild(weightCell);
             row.appendChild(dateCell);
             row.appendChild(lbsCell);
+
+            var update = document.createElement("FORM");
+            var formId = document.createElement("TEXTAREA");
+            formId.appendChild(id);
+            form.className = "formId";
+            var editBtn = document.createElement("BUTTON");
+            editBtn.appendChild(document.createTextNode("Edit"));
+            editBtn.id = "edit";
+            var deleteBtn = document.createElement("BUTTON");
+            deleteBtn.appendChild(document.createTextNode("Delete"));
+            deleteBtn.id = "delete";
+            update.appendChild(formId);
+            update.appendChild(editBtn);
+            update.appendChild(deleteBtn);
+            row.appendChild(update);
+
             var table = document.getElementById('workouts');
             table.appendChild(row);
           }
@@ -106,6 +124,22 @@ function firstTable() {
         row.appendChild(weightCell);
         row.appendChild(dateCell);
         row.appendChild(lbsCell);
+
+        var update = document.createElement("FORM");
+        var formId = document.createElement("TEXTAREA");
+        formId.appendChild(id);
+        form.id = "formId";
+        var editBtn = document.createElement("BUTTON");
+        editBtn.appendChild(document.createTextNode("Edit"));
+        editBtn.id = "edit";
+        var deleteBtn = document.createElement("BUTTON");
+        deleteBtn.appendChild(document.createTextNode("Delete"));
+        deleteBtn.id = "delete";
+        update.appendChild(formId);
+        update.appendChild(editBtn);
+        update.appendChild(deleteBtn);
+        row.appendChild(update);
+
         var table = document.getElementById('workouts');
         table.appendChild(row);
       }
@@ -116,3 +150,42 @@ function firstTable() {
   request.send(null);
 }
 
+function deleteRow() {
+  document.getElementById('edit').addEventListener('click', function(event) {
+    var request = new XMLHttpRequest();
+
+    var button = event.target;
+    var formId;
+    var found = false;
+    var row;
+    while (button.previousSibling.id != "formId") {
+      formId = button.previousSibling;
+    }
+
+    var table = document.getElementById('workouts');
+    for (var i = 0; i < table.rows.length; i++) {
+      var cells = table.row[i].childNodes;
+      var id = cells.getElementById("id");
+      if (Number(id.innerHTML) == formId) {
+        row = table.row[i];
+        found = true;
+        break;
+      }
+    }
+
+    request.onreadystatechange = function() {
+      if (request.readyState == 4 && request.status == 200) {
+        var response = JSON.parse(request.responseText);
+        console.log(response);
+        }
+      }
+    }
+
+    if (found == true) {
+      request.open('GET', '/deleteWorkout?id=' + id, true);
+      request.send(null);
+      table.removeChild(row); 
+    }
+    event.preventDefault();
+  });
+}

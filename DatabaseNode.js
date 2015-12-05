@@ -19,7 +19,6 @@ var pool = mysql.createPool({
 app.use(express.static(__dirname + '/public'));
 
 app.get('/newWorkout', function(req, res, next) {
-  var context = {};
   if (Object.keys(req.query).length == 0) {
     pool.query('SELECT * FROM workouts', function(err, rows, fields) {
       if (err) {
@@ -45,6 +44,17 @@ app.get('/newWorkout', function(req, res, next) {
     });
   }
 });
+
+app.get('/deleteWorkout', function(req, res, next) {
+  pool.query('DELETE FROM workouts WHERE id=(?)', [req.query.id], function(err, result) {
+    if(err) {
+      next(err);
+      return;
+    }
+    res.send(JSON.stringify(result));
+  });
+});
+
 
 app.get('/reset-table',function(req,res,next){
   context = {}
