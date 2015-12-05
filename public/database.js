@@ -19,10 +19,10 @@ function bindButton() {
 		var weight = document.getElementById('weight').value;
 		var date = document.getElementById('date').value;
 		var lbs = document.getElementById('lbs').value;
-                if (name == "") {
-                  console.log("error"); 
-                  return;
-                }
+    if (name == "") {
+      console.log("error"); 
+      return;
+    }
 
 		
 		request.onreadystatechange = function() {

@@ -25,6 +25,10 @@ app.get('/newWorkout', function(req, res, next) {
       return;
     }
   });
+  rens.render(getData)
+});
+
+app.get('/getData', function(req, res, next) {
   pool.query('SELECT * FROM workouts', function(err, rows, fields) {
     var context = {};
     if (err) {
