@@ -51,7 +51,6 @@ app.get('/newWorkout', function(req, res, next) {
 app.post('/', function(req,res,next) {
   if (req.body['Edit']) {
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, rows, fields) {
-      context = {}
       if (err) {
         next(err);
         return;
@@ -61,9 +60,31 @@ app.post('/', function(req,res,next) {
         var date = new Date(rows[0].date);
       	date = date.toJSON();
         data.date = date.substring(0,10);
-      	console.log(data.date);
       }
       res.render('updateWorkout', data);
+    });
+  }
+  if (req.body['Change']) {
+    pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, row) {
+      context = {}
+      if (err) {
+        next(err);
+        return;
+      }
+      if (row.length == 1) {
+        var currRow = row[0];
+        pool.query('UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?', 
+          [req.body.name || currRow.name, req.body.reps || currRow.reps, req.body.weight || currRow.weight, req.body.date || currRow.date, req.body.lbs || currRow.lbs, req.body.id], 
+          function(err, rows, results) {
+          var data = {}
+          if (err) {
+            next(err);
+            return;
+          }
+          data.results = "Updated " + row.changedRows + " rows.";
+          res.sendFile(__dirname +'/public/Form.html');
+        });
+      }
     });
   }
 });

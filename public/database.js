@@ -69,6 +69,11 @@ function createRow(data) {
   var rowId = data.id;
   var name = data.name;
   var date = data.date;
+  if(date != "0000-00-00") {
+    var formatedDate = new Date(date);
+    formatedDate = formateDate.toJSON();
+    date = formatedDate.substring(0,10);
+  }
   var lbs = data.lbs;
   var reps = data.reps;
   var weight = data.weight;
