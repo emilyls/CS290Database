@@ -21,11 +21,13 @@ function bindButton() {
           var id = response[i].id;
           var ids = document.getElementsByClassName("id");
           var found = false;
-          for (var j = 0; !found && j < ids.length; j++) {
-            console.log(id, ids[j].value);
-            if (id == ids[j].value) {
+          var j = 0;
+          while(!found && j < ids.length) {
+            console.log(id, Number(ids[j].innerHTML));
+            if (id == Number(ids[j].innerHTML)) {
               found = true;
             }
+            j++;
           }
           if (!found) {
             var name = response[i].name;
