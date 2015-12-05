@@ -125,24 +125,26 @@ function deleteRow(id) {
     if (request.readyState == 4 && request.status == 200) {
       var response = JSON.parse(request.responseText);
       console.log(response);
+      var table = document.getElementById('workouts');
+      var formIds = document.getElementById('formId');
+      console.log(formIds);
+      var i = 0;
+      var found = false
+      while (!found && i < formIds.length) {
+        if (id == formIds[i].value) {
+          console.log(id, formIds[i].value);
+          found = true;
+        }
+      }
+      if (found) {
+        var row = formIds[i].parentNode.parentNode;
+        table.removeChild(row); 
+      }
     }
   }
 
   request.open('GET', '/deleteWorkout?id=' + id, true);
   request.send(null);
-  var table = document.getElementById('workouts');
-  var formIds = document.getElementById('formId');
-  var i = 0;
-  var found = false
-  while (!found && i < formIds.length) {
-    if (id == formIds[i].value) {
-      found = true;
-    }
-  }
-  if (found) {
-    var row = formIds[i].parentNode.parentNode;
-    table.removeChild(row); 
-  }
   event.preventDefault();
 
 }
