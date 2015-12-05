@@ -19,32 +19,43 @@ function bindButton() {
         console.log(response);
         for (var i = 0; i < response.length; i++) {
           var id = response[i].id;
-          var name = response[i].name;
-          var date = response[i].date;
-          var lbs = response[i].lbs;
-          var reps = response[i].reps;
-          var weight = response[i].weight;
-          var row = document.createElement("tr");
-          var idCell = document.createElement("td");
-          var nameCell = document.createElement("td");
-          var repsCell = document.createElement("td");
-          var weightCell = document.createElement("td");
-          var dateCell = document.createElement("td");
-          var lbsCell = document.createElement("td");
-          idCell.appendChild(document.createTextNode(id));
-          nameCell.appendChild(document.createTextNode(name));
-          repsCell.appendChild(document.createTextNode(reps));
-          weightCell.appendChild(document.createTextNode(weight));
-          dateCell.appendChild(document.createTextNode(date));
-          lbsCell.appendChild(document.createTextNode(lbs));
-          row.appendChild(idCell);
-          row.appendChild(nameCell);
-          row.appendChild(repsCell);
-          row.appendChild(weightCell);
-          row.appendChild(dateCell);
-          row.appendChild(lbsCell);
-          var table = document.getElementById('workouts');
-          table.appendChild(row);
+          var ids = document.getElementsByClassName("id");
+          var found = false;
+          for (var j = 0; !found && j < ids.length; j++) {
+            console.log(id, ids[j].value);
+            if (id == ids[j].value) {
+              found = true;
+            }
+          }
+          if (!found) {
+            var name = response[i].name;
+            var date = response[i].date;
+            var lbs = response[i].lbs;
+            var reps = response[i].reps;
+            var weight = response[i].weight;
+            var row = document.createElement("tr");
+            var idCell = document.createElement("td");
+            var nameCell = document.createElement("td");
+            var repsCell = document.createElement("td");
+            var weightCell = document.createElement("td");
+            var dateCell = document.createElement("td");
+            var lbsCell = document.createElement("td");
+            idCell.appendChild(document.createTextNode(id));
+            idCell.className = "id";
+            nameCell.appendChild(document.createTextNode(name));
+            repsCell.appendChild(document.createTextNode(reps));
+            weightCell.appendChild(document.createTextNode(weight));
+            dateCell.appendChild(document.createTextNode(date));
+            lbsCell.appendChild(document.createTextNode(lbs));
+            row.appendChild(idCell);
+            row.appendChild(nameCell);
+            row.appendChild(repsCell);
+            row.appendChild(weightCell);
+            row.appendChild(dateCell);
+            row.appendChild(lbsCell);
+            var table = document.getElementById('workouts');
+            table.appendChild(row);
+          }
         }
       }
     }
@@ -65,7 +76,6 @@ function firstTable() {
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
       var response = JSON.parse(request.responseText);
-      console.log(response);
       for (var i = 0; i < response.length; i++) {
         var id = response[i].id;
         var name = response[i].name;
@@ -81,6 +91,7 @@ function firstTable() {
         var dateCell = document.createElement("td");
         var lbsCell = document.createElement("td");
         idCell.appendChild(document.createTextNode(id));
+        idCell.className = "id";
         nameCell.appendChild(document.createTextNode(name));
         repsCell.appendChild(document.createTextNode(reps));
         weightCell.appendChild(document.createTextNode(weight));
