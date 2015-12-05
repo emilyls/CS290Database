@@ -134,7 +134,7 @@ function deleteRow(id) {
   var formIds = document.getElementById('formId');
   var i = 0;
   var found = false
-  while (!found && i < forms.length) {
+  while (!found && i < formIds.length) {
     if (id == formIds[i].value) {
       found = true;
     }
