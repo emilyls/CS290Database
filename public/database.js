@@ -14,7 +14,7 @@ function firstTable() {
   }
   request.open('GET', 'createTable', true);
   request.send(null);
-  //event.preventDefault();
+  event.preventDefault();
 }
 
 function bindButton() {
@@ -26,10 +26,15 @@ function bindButton() {
     var weight = document.getElementById('weight').value;
     var date = document.getElementById('date').value;
     var lbs = document.getElementById('lbs').value;
-    console.log(lbs);
     if (name == "" || reps == "" || weight == "" || date == "") {
       console.log("cannot submit incomplete"); 
       valid = false;
+    }
+    if (lbs == "lbs") {
+      lbs = 1;
+    }
+    else {
+      lbs = 0;
     }
     request.onreadystatechange = function() {
       if (request.readyState == 4 && request.status == 200) {
@@ -90,6 +95,7 @@ function createRow(data) {
   dateCell.innerHTML = date;
 
   var lbs = data.lbs;
+  console.log(lbs);
   var lbsCell = document.createElement("TD");
   if (lbs == "lbs") {
     lbsCell.innerHTML = "Pounds";
