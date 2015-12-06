@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', bindButton);
 document.addEventListener('DOMContentLoaded', firstTable);
 
-
 function bindButton() {
   document.getElementById('newWorkout').addEventListener('click', function(event) {
     var request = new XMLHttpRequest();
