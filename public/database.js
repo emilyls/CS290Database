@@ -85,6 +85,7 @@ function createRow(data) {
   var lbsCell = document.createElement("td");
   idCell.appendChild(document.createTextNode(rowId));
   idCell.className = "id";
+  idCell.type = "hidden";
   nameCell.appendChild(document.createTextNode(name));
   repsCell.appendChild(document.createTextNode(reps));
   weightCell.appendChild(document.createTextNode(weight));
@@ -101,7 +102,7 @@ function createRow(data) {
   var deleteFormId = document.createElement("INPUT");
   deleteFormId.className = "deleteId";
   deleteFormId.value = rowId;
-  deleteFormId.type = hidden;
+  deleteFormId.type = "hidden";
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.innerHTML = "Delete";

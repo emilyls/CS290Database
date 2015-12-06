@@ -42,6 +42,7 @@ app.get('/newWorkout', function(req, res, next) {
           next(err);
           return;
         }
+        console.log(req.query.lbs)
         res.send(JSON.stringify(rows));
       });
     });
@@ -112,7 +113,6 @@ app.get('/reset-table',function(req,res,next){
     "lbs BOOLEAN)";
     pool.query(createString, function(err){
       context.results = "Table reset";
-      console.log(context.results);
     });
   });
   res.sendFile(__dirname +'/public/Form.html');
