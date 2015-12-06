@@ -60,7 +60,7 @@ function firstTable() {
         createRow(response[i]);
       }
     }
-  }};
+  });
   request.send(null);
 }
 
