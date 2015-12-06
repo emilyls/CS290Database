@@ -1,6 +1,22 @@
 document.addEventListener('DOMContentLoaded', bindButton);
 document.addEventListener('DOMContentLoaded', firstTable);
 
+
+function firstTable() {
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200) {
+      var response = JSON.parse(request.responseText);
+      for (var i = 0; i < response.length; i++) {
+        createRow(response[i]);
+      }
+    }
+  }
+  request.open('GET', 'createTable', true);
+  request.send(null);
+  //event.preventDefault();
+}
+
 function bindButton() {
   document.getElementById('newWorkout').addEventListener('click', function(event) {
     var request = new XMLHttpRequest();
@@ -12,7 +28,7 @@ function bindButton() {
     var lbs = document.getElementById('lbs').value;
     console.log(lbs);
     if (name == "" || reps == "" || weight == "" || date == "") {
-      console.log("cannot submit with no name"); 
+      console.log("cannot submit incomplete"); 
       valid = false;
     }
     if (lbs == null) {
@@ -25,12 +41,12 @@ function bindButton() {
       if (request.readyState == 4 && request.status == 200) {
         var response = JSON.parse(request.responseText);
         for (var i = 0; i < response.length; i++) {
-          var id = response[i].id;
+          var responseId = response[i].id;
           var ids = document.getElementsByClassName("id");
           var found = false;
           var j = 0;
           while(!found && j < ids.length) {
-            if (id == Number(ids[j].innerHTML)) {
+            if (responseId == Number(ids[j].innerHTML)) {
               found = true;
             }
             j++;
@@ -55,48 +71,50 @@ function bindButton() {
   });
 }
 
-function firstTable() {
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    if (request.readyState == 4 && request.status == 200) {
-      var response = JSON.parse(request.responseText);
-      for (var i = 0; i < response.length; i++) {
-        createRow(response[i]);
-      }
-    }
-  }
-  request.open('GET', 'newWorkout', true);
-  request.send(null);
-  event.preventDefault();
-}
-
 function createRow(data) {
-  var rowId = data.id;
-  var name = data.name;
+  //var rowId = data.id;
+  //idCell.appendChild(document.createTextNode(rowId));
+  //idCell.type = "hidden";
+  var idCell = document.createElement("TD");
+  idCell.innerHTML = data.id;
+  idCell.className = "id";
+  
+  //nameCell.appendChild(document.createTextNode(name));
+  var nameCell = document.createElement("TD");
+  nameCell.innerHTML = data.name;
+  
+  //var reps = data.reps;
+  //repsCell.appendChild(document.createTextNode(reps));
+  var repsCell = document.createElement("TD");
+  repsCell.innerHTML = data.reps;
+  
+  //var weight = data.weight;
+  //weightCell.appendChild(document.createTextNode(weight));
+  var weightCell = document.createElement("TD");
+  weightCell.innerHTML = data.weight;
+  
+  //dateCell.appendChild(document.createTextNode(date));
   var date = data.date;
   if(date != "0000-00-00") {
     var formattedDate = new Date(date);
     formattedDate = formattedDate.toJSON();
     date = formattedDate.substring(0,10);
   }
+  var dateCell = document.createElement("TD");
+  dateCell.innerHTML = date;
+
+
+  //lbsCell.appendChild(document.createTextNode(lbs));
   var lbs = data.lbs;
-  var reps = data.reps;
-  var weight = data.weight;
-  var row = document.createElement("tr");
-  var idCell = document.createElement("td");
-  var nameCell = document.createElement("td");
-  var repsCell = document.createElement("td");
-  var weightCell = document.createElement("td");
-  var dateCell = document.createElement("td");
-  var lbsCell = document.createElement("td");
-  idCell.appendChild(document.createTextNode(rowId));
-  idCell.className = "id";
-  idCell.type = "hidden";
-  nameCell.appendChild(document.createTextNode(name));
-  repsCell.appendChild(document.createTextNode(reps));
-  weightCell.appendChild(document.createTextNode(weight));
-  dateCell.appendChild(document.createTextNode(date));
-  lbsCell.appendChild(document.createTextNode(lbs));
+  var lbsCell = document.createElement("TD");
+  if (lbs == 1) {
+    lbsCell.innerHTML = "Pounds";
+  }
+  else {
+    lbsCell.innerHTML = "Kilos";
+  }
+
+  var row = document.createElement("TR");
   row.appendChild(idCell);
   row.appendChild(nameCell);
   row.appendChild(repsCell);

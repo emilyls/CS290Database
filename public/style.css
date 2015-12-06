@@ -13,14 +13,14 @@ legend {
   font-weight: bold;
   font-size: 1em;
 }
+
 input {
   margin-right: 2em;
 }
-#newWorkOut {
-  width: 75px;
-}
-#lbs {
-  width: 10px;
+
+
+#weight {
+  width: 50px;
 }
 
 #exercise {
@@ -30,7 +30,7 @@ input {
 #reps {
   width: 50px;
 }
-#weight {
+#lbs {
   width: 50px;
 }
 
