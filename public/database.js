@@ -31,12 +31,6 @@ function bindButton() {
       console.log("cannot submit incomplete"); 
       valid = false;
     }
-    if (lbs == null) {
-      lbs = 0;
-    }
-    else {
-      lbs = 1;
-    }
     request.onreadystatechange = function() {
       if (request.readyState == 4 && request.status == 200) {
         var response = JSON.parse(request.responseText);
@@ -72,28 +66,20 @@ function bindButton() {
 }
 
 function createRow(data) {
-  //var rowId = data.id;
-  //idCell.appendChild(document.createTextNode(rowId));
-  //idCell.type = "hidden";
+
   var idCell = document.createElement("TD");
   idCell.innerHTML = data.id;
   idCell.className = "id";
   
-  //nameCell.appendChild(document.createTextNode(name));
   var nameCell = document.createElement("TD");
   nameCell.innerHTML = data.name;
   
-  //var reps = data.reps;
-  //repsCell.appendChild(document.createTextNode(reps));
   var repsCell = document.createElement("TD");
   repsCell.innerHTML = data.reps;
   
-  //var weight = data.weight;
-  //weightCell.appendChild(document.createTextNode(weight));
   var weightCell = document.createElement("TD");
   weightCell.innerHTML = data.weight;
   
-  //dateCell.appendChild(document.createTextNode(date));
   var date = data.date;
   if(date != "0000-00-00") {
     var formattedDate = new Date(date);
@@ -103,11 +89,9 @@ function createRow(data) {
   var dateCell = document.createElement("TD");
   dateCell.innerHTML = date;
 
-
-  //lbsCell.appendChild(document.createTextNode(lbs));
   var lbs = data.lbs;
   var lbsCell = document.createElement("TD");
-  if (lbs == 1) {
+  if (lbs == "lbs") {
     lbsCell.innerHTML = "Pounds";
   }
   else {
