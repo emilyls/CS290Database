@@ -52,15 +52,16 @@ function bindButton() {
 
 function firstTable() {
   var request = new XMLHttpRequest();
-  request.open('GET', 'newWorkout', true);
-  request.addEventListener('Load', function() {
-    if (request.status >= 200 && request.status < 400) {
+  request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200) {
       var response = JSON.parse(request.responseText);
       for (var i = 0; i < response.length; i++) {
         createRow(response[i]);
       }
     }
-  });
+  }
+
+  request.open('GET', 'newWorkout', true);
   request.send(null);
 }
 
