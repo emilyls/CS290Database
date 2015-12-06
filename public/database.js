@@ -26,7 +26,6 @@ function bindButton() {
     var weight = document.getElementById('weight').value;
     var date = document.getElementById('date').value;
     var lbs = document.getElementById('lbs').value;
-    console.log(lbs);
     if (name == "" || reps == "" || weight == "" || date == "") {
       console.log("cannot submit incomplete"); 
       valid = false;
@@ -96,7 +95,6 @@ function createRow(data) {
   dateCell.innerHTML = date;
 
   var lbs = data.lbs;
-  console.log(lbs);
   var lbsCell = document.createElement("TD");
   if (lbs == 1) {
     lbsCell.innerHTML = "Pounds";
@@ -132,20 +130,16 @@ function createRow(data) {
   deleteBtn.addEventListener('click', function(x) {
     var id = x;
     return function () {
-      console.log(id);
       var request = new XMLHttpRequest();
       request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
           var response = JSON.parse(request.responseText);
-          console.log(response);
           var table = document.getElementById('workouts');
           var rowIds = document.getElementsByClassName('id');
-          console.log(rowIds);
           var i = 0;
           var found = false
           while (!found && i < rowIds.length) {
             if (id == Number(rowIds[i].innerHTML)) {
-              console.log(id, Number(rowIds[i].innerHTML));
               found = true;
             }
             i++;
@@ -177,7 +171,7 @@ function createRow(data) {
   editBtn.innerHTML = "Edit";
   editBtn.name = "Edit";
   editBtn.value ="Edit";
-  editBtn.type = 'submit';
+  editBtn.type = "submit";
   editForm.appendChild(editBtn);
 
   var editCell = document.createElement("TD");

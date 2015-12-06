@@ -49,7 +49,7 @@ app.get('/createTable', function(req, res, next) {
 });
 
 app.post('/', function(req,res,next) {
-  console.log(req);
+  console.log(req.body);
   if (req.body['Edit']) {
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, rows, fields) {
       if (err) {
@@ -72,8 +72,8 @@ app.post('/', function(req,res,next) {
     });
   }
   else {
+    consol.log(req.body);
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, row) {
-      context = {}
       if (err) {
         next(err);
         return;
@@ -107,7 +107,6 @@ app.get('/deleteWorkout', function(req, res, next) {
 
 
 app.get('/reset-table',function(req,res,next){
-  context = {}
   pool.query("DROP TABLE IF EXISTS workouts", function(err){
     var createString = "CREATE TABLE workouts("+
     "id INT PRIMARY KEY AUTO_INCREMENT,"+
@@ -117,10 +116,13 @@ app.get('/reset-table',function(req,res,next){
     "date DATE,"+
     "lbs BOOLEAN)";
     pool.query(createString, function(err){
-      context.results = "Table reset";
+      if (err) {
+        next(err);
+        return
+      }
     });
+    res.sendFile(__dirname +'/public/Form.html');
   });
-  res.sendFile(__dirname +'/public/Form.html');
 });
 
 app.listen(app.get('port'), function(){
