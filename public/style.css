@@ -58,3 +58,7 @@ caption {
 table td, table th {
   border: 1px solid black;
 }
+
+#id {
+  display: none;
+}

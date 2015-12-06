@@ -12,9 +12,15 @@ function bindButton() {
     var date = document.getElementById('date').value;
     var lbs = document.getElementById('lbs').value;
     console.log(lbs);
-    if (name == "" || reps == null || weight == null || date == null || lbs == null) {
+    if (name == "" || reps == null || weight == null || date == null) {
       console.log("cannot submit with no name"); 
       valid = false;
+    }
+    if (lbs == null) {
+      lbs = 0;
+    }
+    else {
+      lbs = 1;
     }
     request.onreadystatechange = function() {
       if (request.readyState == 4 && request.status == 200) {
