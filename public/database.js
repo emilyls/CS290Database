@@ -11,7 +11,7 @@ function bindButton() {
     var date = document.getElementById('date').value;
     var lbs = document.getElementById('lbs').value;
     console.log(lbs);
-    if (name == "" || reps == null || weight == null || date == null) {
+    if (name == "" || reps == "" || weight == "" || date == "") {
       console.log("cannot submit with no name"); 
       valid = false;
     }
