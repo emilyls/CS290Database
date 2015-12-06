@@ -68,6 +68,7 @@ function firstTable() {
   }
   request.open('GET', 'newWorkout', true);
   request.send(null);
+  event.preventDefault();
 }
 
 function createRow(data) {
