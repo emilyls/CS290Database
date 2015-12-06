@@ -49,6 +49,7 @@ app.get('/newWorkout', function(req, res, next) {
 });
 
 app.post('/', function(req,res,next) {
+  console.log(req);
   if (req.body['Edit']) {
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, rows, fields) {
       if (err) {
