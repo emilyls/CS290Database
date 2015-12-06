@@ -51,8 +51,8 @@
     <label for="date">Date:</label>
     <input type="text" name="date" id="date" value="{{this.date}}">
 
-    <input type="radio" name="unit" id="lbs" value="lbs" {{#if this.lbs}}checked="checked"{{/if}}/>Pounds
-    <input type="radio" name="unit" id="lbs" value="kilo" {{#if this.kilo}}checked="checked"{{/if}}/>Kilograms 
+    <input type="radio" name="unit" id="lbs" {{#if this.lbs}}value="lbs" checked="checked"{{/if}}/>Pounds
+    <input type="radio" name="unit" id="lbs" {{#if this.kilo}}value="kilo" checked="checked"{{/if}}/>Kilograms 
 
     <input type="submit" id="Update" name="Update" value="Update">
   </fieldset>
