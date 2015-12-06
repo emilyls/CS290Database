@@ -25,7 +25,7 @@ function bindButton() {
     var reps = document.getElementById('reps').value;
     var weight = document.getElementById('weight').value;
     var date = document.getElementById('date').value;
-    var lbs = document.getElementById('unit').value;
+    var lbs = document.getElementById('lbs').value;
     console.log(lbs);
     if (name == "" || reps == "" || weight == "" || date == "") {
       console.log("cannot submit incomplete"); 

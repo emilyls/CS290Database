@@ -48,8 +48,6 @@ app.get('/createTable', function(req, res, next) {
   });
 });
 
-
-
 app.post('/', function(req,res,next) {
   console.log(req);
   if (req.body['Edit']) {
