@@ -85,7 +85,6 @@ function createRow(data) {
   var lbsCell = document.createElement("td");
   idCell.appendChild(document.createTextNode(rowId));
   idCell.className = "id";
-  idCell.type = "hidden"
   nameCell.appendChild(document.createTextNode(name));
   repsCell.appendChild(document.createTextNode(reps));
   weightCell.appendChild(document.createTextNode(weight));
