@@ -132,7 +132,7 @@ function createRow(data) {
             i++;
           }
           if (found) {
-            var row = rowIds[i].parentNode;
+            var row = rowIds[i-1].parentNode;
             table.removeChild(row); 
           }
         }
