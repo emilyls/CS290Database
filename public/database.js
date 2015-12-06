@@ -60,7 +60,6 @@ function firstTable() {
       }
     }
   }
-
   request.open('GET', 'newWorkout', true);
   request.send(null);
 }
@@ -140,6 +139,7 @@ function createRow(data) {
       }
       request.open('GET', '/deleteWorkout?id=' + id, true);
       request.send(null);
+      event.preventDefault();
     };
   }(deleteFormId.value)); 
 
