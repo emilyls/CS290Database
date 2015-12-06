@@ -41,7 +41,7 @@
     }
 </style
 <script src="updateForm.js"></script>
-<form>
+<form method="POST">
   <fieldset>
     <legend>Edit Workout</legend>
     <input type="hidden" name="id" id="id" value="{{this.id}}">
@@ -61,7 +61,7 @@
     <input type="radio" name="unit" id="lbs" value="lbs" {{#if this.lbs}}checked="checked"{{/if}}/>Pounds
     <input type="radio" name="unit" id="lbs" value="kilo" {{#if this.kilo}}checked="checked"{{/if}}/>Kilograms 
 
-    <input type="submit" id="Update" name="Update" value="Update">
+    <input type="button" id="Update" name="Update" value="Update">
   </fieldset>
 </form>
 
