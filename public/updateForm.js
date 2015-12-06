@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', bindButton);
-function bindButton() {
+document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('Update').addEventListener('click', function(event) {
     console.log("In Event Listener");
     var request = new XMLHttpRequest();
@@ -25,8 +24,9 @@ function bindButton() {
       
     }
     request.open('Post', '/', true);
-    //request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify(payload));
     event.preventDefault();
   });
+  event.preventDefault();
 } 
