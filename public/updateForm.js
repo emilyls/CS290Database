@@ -7,14 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
     payload.reps = document.getElementById('reps').value;
     payload.weight = document.getElementById('weight').value;
     payload.date = document.getElementById('date').value;
-    payload.lbs = document.getElementById('lbs').value;
-    console.log(payload.lbs);
-    if (payload.lbs == "lbs") {
-        payload.lbs = 1;
+    if (document.getElementById('lbs').checked){
+      payload.lbs = 1;
     }
     else {
         payload.lbs = 0;
     }
+    
+    console.log(payload.lbs);
+
 
     request.onreadystatechange = function() {
       if(request.readyState == 4 && request.status == 200) {
