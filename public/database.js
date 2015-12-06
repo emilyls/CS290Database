@@ -97,7 +97,7 @@ function createRow(data) {
   var lbs = data.lbs;
   console.log(lbs);
   var lbsCell = document.createElement("TD");
-  if (lbs == "lbs") {
+  if (lbs == 1) {
     lbsCell.innerHTML = "Pounds";
   }
   else {
