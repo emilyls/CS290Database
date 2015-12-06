@@ -49,7 +49,6 @@ app.get('/createTable', function(req, res, next) {
 });
 
 app.post('/', function(req,res,next) {
-  console.log(req.body);
   if (req.body['Edit']) {
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, rows, fields) {
       if (err) {
@@ -72,7 +71,6 @@ app.post('/', function(req,res,next) {
     });
   }
   else {
-    console.log(req.body);
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, row) {
       if (err) {
         next(err);

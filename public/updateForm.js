@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('Update').addEventListener('click', function(event) {
-    console.log("In Event Listener");
     var request = new XMLHttpRequest();
     var payload = {id:null, name:null, reps:null, weight:null, date:null, lbs:null};
     payload.id = document.getElementById('id').value;
@@ -9,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     payload.weight = document.getElementById('weight').value;
     payload.date = document.getElementById('date').value;
     payload.lbs = document.getElementById('lbs').value;
+    console.log(payload.lbs);
     if (payload.lbs == "lbs") {
         payload.lbs = 1;
     }
@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     request.onreadystatechange = function() {
-      console.log("In ready state change");
       if(request.readyState == 4 && request.status == 200) {
        window.location.href = 'Form.html';
       }
