@@ -11,8 +11,8 @@ function bindButton() {
     var weight = document.getElementById('weight').value;
     var date = document.getElementById('date').value;
     var lbs = document.getElementById('lbs').value;
-    console.log("Pounds: " + lbs);
-    if (name == "") {
+    console.log(lbs);
+    if (name == "" || reps == null || weight == null || date == null || lbs == null) {
       console.log("cannot submit with no name"); 
       valid = false;
     }
@@ -85,6 +85,7 @@ function createRow(data) {
   var lbsCell = document.createElement("td");
   idCell.appendChild(document.createTextNode(rowId));
   idCell.className = "id";
+  idCell.type = "hidden"
   nameCell.appendChild(document.createTextNode(name));
   repsCell.appendChild(document.createTextNode(reps));
   weightCell.appendChild(document.createTextNode(weight));
@@ -101,6 +102,7 @@ function createRow(data) {
   var deleteFormId = document.createElement("INPUT");
   deleteFormId.className = "deleteId";
   deleteFormId.value = rowId;
+  deleteFormId.type = hidden;
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
   deleteBtn.innerHTML = "Delete";
@@ -151,6 +153,7 @@ function createRow(data) {
   editFormId.className = "editId";
   editFormId.value = rowId;
   editFormId.name ="id";
+  editFormId.type = "hidden";
   editForm.appendChild(editFormId);
 
   var editBtn = document.createElement("INPUT");
