@@ -72,7 +72,7 @@ app.post('/', function(req,res,next) {
     });
   }
   else {
-    consol.log(req.body);
+    console.log(req.body);
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, row) {
       if (err) {
         next(err);
