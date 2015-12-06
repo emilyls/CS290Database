@@ -114,7 +114,9 @@ function createRow(data) {
   deleteBtn.innerHTML = "Delete";
   deleteBtn.type = 'submit';
   deleteForm.appendChild(deleteBtn);
-  row.appendChild(deleteForm);
+  var deleteCell = document.createElement("TD");
+  deleteCell.appendChild(deleteForm);
+  row.appendChild(deleteCell);
   var table = document.getElementById('workouts');
   table.appendChild(row);
 
@@ -169,7 +171,9 @@ function createRow(data) {
   editBtn.type = 'submit';
   editForm.appendChild(editBtn);
 
-  row.appendChild(editForm);
+  var editCell = document.createElement("TD");
+  editCell.appendChild(editForm);
+  row.appendChild(editCell);
   var table = document.getElementById('workouts');
   table.appendChild(row);   
 }
