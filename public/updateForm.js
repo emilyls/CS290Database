@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', bindButton);
 function bindButton() {
   document.getElementById('Update').addEventListener('click', function(event) {
+    console.log("In Event Listener");
     var request = new XMLHttpRequest();
     var payload = {id:null, name:null, reps:null, weight:null, date:null, lbs:null};
     payload.id = document.getElementById('id').value;
@@ -17,7 +18,7 @@ function bindButton() {
     }
 
     request.onreadystatechange = function() {
-      console.log("test");
+      console.log("In ready state change");
       if(request.readyState == 4 && request.status == 200) {
        window.location.href = 'Form.html';
       }
