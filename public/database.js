@@ -125,7 +125,7 @@ function createRow(data) {
   var deleteForm = document.createElement("FORM");
   var deleteFormId = document.createElement("INPUT");
   deleteFormId.className = "deleteId";
-  deleteFormId.value = rowId;
+  deleteFormId.value = data.id;
   deleteFormId.type = "hidden";
   deleteForm.appendChild(deleteFormId);
   var deleteBtn = document.createElement("BUTTON");
@@ -177,7 +177,7 @@ function createRow(data) {
 
   var editFormId = document.createElement("INPUT");
   editFormId.className = "editId";
-  editFormId.value = rowId;
+  editFormId.value = data.id;
   editFormId.name ="id";
   editFormId.type = "hidden";
   editForm.appendChild(editFormId);
