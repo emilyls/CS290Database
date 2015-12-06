@@ -79,7 +79,7 @@ app.post('/', function(req,res,next) {
       if (row.length == 1) {
         var currRow = row[0];
         pool.query('UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?', 
-          [req.body.name || currRow.name, req.body.reps || currRow.reps, req.body.weight || currRow.weight, req.body.date || currRow.date, req.body.lbs || currRow.lbs, req.body.id], 
+          [req.body.name || currRow.name, req.body.reps || currRow.reps, req.body.weight || currRow.weight, req.body.date || currRow.date, req.body.lbs, req.body.id], 
           function(err, rows, results) {
           var data = {}
           if (err) {
