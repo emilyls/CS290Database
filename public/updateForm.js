@@ -9,6 +9,12 @@ function bindButton() {
     payload.weight = document.getElementById('weight').value;
     payload.date = document.getElementById('date').value;
     payload.lbs = document.getElementById('lbs').value;
+    if (payload.lbs == "lbs") {
+        payload.lbs = 1;
+    }
+    else {
+        payload.lbs = 0;
+    }
 
     request.onreadystatechange = function() {
       console.log("test");
@@ -18,7 +24,7 @@ function bindButton() {
       
     }
     request.open('Post', '/', true);
-    request.setRequestHeader('Content-Type', 'application/json');
+    //request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify(payload));
     event.preventDefault();
   });
