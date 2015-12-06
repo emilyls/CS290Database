@@ -11,9 +11,9 @@ function bindButton() {
     payload.lbs = document.getElementById('lbs').value;
 
     request.onreadystatechange = function() {
+      console.log("test");
       if(request.readyState == 4 && request.status == 200) {
-        var response = JSON.parse(request.responseText);
-        console.log(request);
+       window.location.href = 'Form.html';
       }
       
     }

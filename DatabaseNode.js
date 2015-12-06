@@ -64,7 +64,7 @@ app.post('/', function(req,res,next) {
       res.render('updateWorkout', data);
     });
   }
-  if (req.body['Change']) {
+  else {
     pool.query('SELECT * FROM workouts WHERE id=(?)', [req.body.id], function(err, row) {
       context = {}
       if (err) {
@@ -81,8 +81,7 @@ app.post('/', function(req,res,next) {
             next(err);
             return;
           }
-          data.results = "Updated " + row.changedRows + " rows.";
-          res.sendFile(__dirname +'/public/Form.html');
+          res.sendFile(__dirname + '/public/Form.html');
         });
       }
     });
