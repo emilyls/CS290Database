@@ -62,6 +62,12 @@ app.post('/', function(req,res,next) {
       	date = date.toJSON();
         data.date = date.substring(0,10);
       }
+      if(data.lbs == 0){
+        data.kilo = 1;
+      }
+      else {
+        data.kilo = 0;
+      }
       res.render('updateWorkout', data);
     });
   }
